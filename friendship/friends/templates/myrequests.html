@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+<title>My Requests</title>
+
+<center>
+  	<div class = "col-md-8 offset-md-0.5 pt-5">
+		<center>
+{% if user.is_authenticated %}
+	{% if messages %}
+		{% for message in messages %}
+			{% if message.level == DEFAULT_MESSAGE_LEVELS.INFO %}
+					<div class="alert alert-success" role="alert">
+							{{ message }}
+					</div>
+			{% endif %}
+		{% endfor %}
+	{% endif %}
+	<ul>
+
+	{% for request in my_requests %}
+
+		<li>{{ request.sender_profile }} ----- <a href="accept_request/{{ request.id }}/" class="btn btn-success mb-3">ACCEPT</a></li>
+		<hr>
+
+	{% endfor %}
+
+
+	</ul>
+</center>
+</div>
+</center>
+
+{% else %}
+	
+	<h2>You ARE NOT AUTHENTICATED</h2>
+
+{% endif %}
+{% endblock %}

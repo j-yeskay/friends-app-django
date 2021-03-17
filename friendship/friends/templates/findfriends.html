@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<title>Find Friends</title>
+{% if user.is_authenticated %}
+<center>
+  	<div class = "col-md-8 offset-md-0.5 pt-5">
+		<center>
+	<form method="get">
+		<input name="q" type="text" placeholder="Search">
+
+		<button type="submit" class="btn btn-outline-info">Search</button>
+	</form>
+
+	{% if messages %}
+		{% for message in messages %}
+			{% if message.level == DEFAULT_MESSAGE_LEVELS.INFO %}
+				<div class="alert alert-primary" role="alert">
+						{{ message }}
+				</div>
+			{% else %}
+				<div class="alert alert-danger" role="alert">
+						{{ message }}
+				</div>
+			{% endif %}
+
+		{% endfor %}
+	{% endif %}
+	<ul>
+
+	{% for friend in find_friends %}
+
+			<li>{{friend.user}} ----- <a href="send_request/{{ friend.id }}/"class="btn btn-primary mb-3">SEND</a></li>
+			<hr>
+	{% endfor %}
+
+	</ul>
+
+</center>
+</div>
+</center>
+
+{% else %}
+	
+	<h2>You ARE NOT AUTHENTICATED</h2>
+
+{% endif %}
+
+{% endblock %}

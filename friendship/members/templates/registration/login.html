@@ -1,0 +1,27 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+{% block title %}
+    <title>Login</title>
+{% endblock %}
+
+<div class = "container" style="margin-top: 60px;
+  width: 100%;
+  border: 3px solid yellow;
+  padding: 10px;">
+<h1>Login</h1>
+<br>
+<form method="POST">
+      {% csrf_token %}
+      {{form.username.label}} {{ form.username }}<br><br>
+      {{form.password.label}} {{ form.password }}<br><br>
+
+
+    <button class="btn btn-warning">Login</button>
+    {{form.errors}}
+</form>
+<hr>
+or <a href="{% url 'register' %}" class = "btn btn-outline-success">Register</a>
+</div>
+{% endblock %}
